@@ -62,13 +62,12 @@ namespace Ping {
                 catch (WebException ex) {
                     using (WebResponse response = ex.Response) {
                         HttpWebResponse httpResponse = (HttpWebResponse)response;
-                        text = text + " : Failed. Error: " + (string)httpResponse.StatusCode.ToString();
+                        text = text + " : Failed. Error: " + httpResponse.StatusCode.ToString();
                     }
                 }
-                
+
+                //Regardless of what occurred, state what happened
                 WriteAndLog(text);
-
-
             }
         }
         //Write a specified message to specified file, and to the console.
@@ -77,5 +76,4 @@ namespace Ping {
             Console.WriteLine(message);
         }
     }
-
 }
