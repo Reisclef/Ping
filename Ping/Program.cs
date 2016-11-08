@@ -6,7 +6,7 @@ using System.IO;
 namespace Ping {
     class Program {
         static string location = "https://google.com";
-        static string path = Directory.GetCurrentDirectory() + "\\log.log";
+        static string path = Directory.GetCurrentDirectory() + "\\ping.log";
         static int repetitions = 1;
         static void Main(string[] args) {
             //Based on the number of arguments, set the variables from default
