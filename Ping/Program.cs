@@ -9,26 +9,9 @@ namespace Ping {
         static string path = Directory.GetCurrentDirectory() + "\\ping.log";
         static int repetitions = 1;
         static void Main(string[] args) {
-            //Based on the number of arguments, set the variables from default
-            switch (args.Length) {
-                case 0:
-                    Console.WriteLine("Usage: URL_to_ping log_file repetitions");
-                    break;
-                case 1:
-                    Console.WriteLine("Usage: URL_to_ping log_file repetitions");
-                    location = args[0];
-                    break;
-                case 2:
-                    Console.WriteLine("Usage: URL_to_ping log_file repetitions");
-                    location = args[0];
-                    path = args[1];
-                    break;
-                case 3:
-                    location = args[0];
-                    path = args[1];
-                    repetitions = Convert.ToInt32(args[2]);
-                    break;
-            }
+
+            //Prepare, based on the arguments received
+            manageArguments(args);
 
             //Write a message to begin the file
             WriteAndLog(Environment.NewLine + $"Pinging {location} and logging to {path}");
@@ -70,6 +53,31 @@ namespace Ping {
                 WriteAndLog(text);
             }
         }
+
+        //Based on the number of arguments, set the variables from default
+        static void manageArguments(string[] arguments) {
+            string usageStatement = "Usage: URL_to_ping \"<string>\" log_file \"<string>\" repetitions <int>";
+            switch (arguments.Length) {
+                case 0:
+                    Console.WriteLine(usageStatement);
+                    break;
+                case 1:
+                    Console.WriteLine(usageStatement);
+                    location = arguments[0];
+                    break;
+                case 2:
+                    Console.WriteLine(usageStatement);
+                    location = arguments[0];
+                    path = arguments[1];
+                    break;
+                case 3:
+                    location = arguments[0];
+                    path = arguments[1];
+                    repetitions = Convert.ToInt32(arguments[2]);
+                    break;
+            }
+        }
+
         //Write a specified message to specified file, and to the console.
         static void WriteAndLog(string message) {
             File.AppendAllText(path, message);
