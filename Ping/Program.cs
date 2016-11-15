@@ -45,7 +45,12 @@ namespace Ping {
                 catch (WebException ex) {
                     using (WebResponse response = ex.Response) {
                         HttpWebResponse httpResponse = (HttpWebResponse)response;
-                        text = text + " : Failed. Error: " + httpResponse.StatusCode.ToString();
+                        if (httpResponse != null) {
+                            text = text + " : Failed. Error: " + httpResponse.StatusCode.ToString();
+                        }
+                        else {
+                            text = text + " : Failed. Unknown error occurred as response was null.";
+                        }
                     }
                 }
 
