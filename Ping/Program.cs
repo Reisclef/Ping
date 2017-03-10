@@ -31,12 +31,12 @@ namespace Ping {
                     }
                 }
 
-                //Prepare the log message, and the request
+                //Prepare the log message
                 string text = Environment.NewLine + DateTime.Now;
-                WebRequest request = WebRequest.Create(location);
 
-                //See if the response was OK
+                //Send request, and see if the response was OK
                 try {
+                    WebRequest request = WebRequest.Create(location);
                     using (WebResponse response = request.GetResponse()) {
                         text = text + " : Success";
                     }
@@ -52,6 +52,9 @@ namespace Ping {
                             text = text + " : Failed. Unknown error occurred as response was null.";
                         }
                     }
+                }
+                catch (UriFormatException) {
+                    text = text + " : Failed. The URI format was invalid, please try again.";
                 }
 
                 //Regardless of what occurred, state what happened
